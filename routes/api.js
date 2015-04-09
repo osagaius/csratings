@@ -28,7 +28,10 @@ router.route('/posts')
 	.post(function(req, res){
 
 		var post = new Post();
-		post.text = req.body.text;
+		post.title = req.body.title;
+		post.description = req.body.description;
+		post.upvotes = req.body.upvotes;
+
 		post.created_by = req.body.created_by;
 		post.save(function(err, post) {
 			if (err){
@@ -39,9 +42,7 @@ router.route('/posts')
 	})
 	//gets all posts
 	.get(function(req, res){
-		console.log('debug1');
 		Post.find(function(err, posts){
-			console.log('debug2');
 			if(err){
 				return res.send(500, err);
 			}
@@ -61,12 +62,13 @@ router.route('/posts/:id')
 	}) 
 	//updates specified post
 	.put(function(req, res){
+		console.log('Putting')
 		Post.findById(req.params.id, function(err, post){
-			if(err)
-				res.send(err);
+			if(err)	res.send(err);
 
-			post.created_by = req.body.created_by;
-			post.text = req.body.text;
+			req.post.upvote(function(err, post){
+			    if (err) { return next(err); }
+			});
 
 			post.save(function(err, post){
 				if(err)
@@ -76,6 +78,7 @@ router.route('/posts/:id')
 			});
 		});
 	})
+
 	//deletes the post
 	.delete(function(req, res) {
 		Post.remove({

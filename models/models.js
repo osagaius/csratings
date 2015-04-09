@@ -4,7 +4,9 @@ var Schema = mongoose.Schema;
 var postSchema = new mongoose.Schema({
 	created_by: String,		//should be changed to ObjectId, ref "User"
 	created_at: {type: Date, default: Date.now},
-	text: String
+	title: String,
+	description: String,
+	upvotes: Number
 });
 
 var userSchema = new mongoose.Schema({
@@ -13,6 +15,10 @@ var userSchema = new mongoose.Schema({
 	created_at: {type: Date, default: Date.now}
 })
 
+postSchema.methods.upvote = function(cb) {
+  this.upvotes += 1;
+  this.save(cb);
+};
 
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);

@@ -34,15 +34,23 @@ app.factory('postService', function($resource){
 
 app.controller('mainController', function(postService, $scope, $rootScope){
 	$scope.posts = postService.query();
-	$scope.newPost = {created_by: '', text: '', created_at: ''};
+	$scope.newPost = {created_by: '', title: '', description: '', upvotes: 0, created_at: ''};
 	
 	$scope.post = function() {
 	  $scope.newPost.created_by = $rootScope.current_user;
 	  $scope.newPost.created_at = Date.now();
 	  postService.save($scope.newPost, function(){
 	    $scope.posts = postService.query();
-	    $scope.newPost = {created_by: '', text: '', created_at: ''};
+	    $scope.newPost = {created_by: '', title: '', description: '', upvotes: 0, created_at: ''};
 	  });
+	};
+
+	$scope.incrementUpvotes = function(post) {
+	console.log('incrementing upvotes.');
+	return postService.put('/posts/' + post._id)
+		.success(function(data){
+	  		post.upvotes += 1;
+		});
 	};
 });
 
