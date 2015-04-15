@@ -29,7 +29,11 @@ app.config(function($routeProvider){
 });
 
 app.factory('postService', function($resource){
-	return $resource('/api/posts/:id');
+	
+	return $resource('/api/posts/:id', null,
+    {
+        'update': { method:'PUT' }
+    });
 });
 
 app.controller('mainController', function(postService, $scope, $rootScope){
@@ -46,11 +50,9 @@ app.controller('mainController', function(postService, $scope, $rootScope){
 	};
 
 	$scope.incrementUpvotes = function(post) {
-	console.log('incrementing upvotes.');
-	return postService.put('/posts/' + post._id)
-		.success(function(data){
-	  		post.upvotes += 1;
-		});
+		console.log(post._id);
+		post.upvotes++;
+		post.$update();
 	};
 });
 
