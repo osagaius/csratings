@@ -62,21 +62,19 @@ router.route('/posts/:id')
 	}) 
 	//updates specified post
 	.put(function(req, res){
-		console.log('Putting')
+		console.log('Putting');
 		Post.findById(req.params.id, function(err, post){
-			if(err)	res.send(err);
-
-			req.post.upvote(function(err, post){
-			    if (err) { return next(err); }
-			});
+			if(err) {res.send(err);}
+			post.upvotes++;
+			console.log('Updated votes');
 
 			post.save(function(err, post){
-				if(err)
-					res.send(err);
-
-				res.json(post);
+				if(err) {res.send(err);}
+				res.send(post);
 			});
+
 		});
+		console.log("finished");
 	})
 
 	//deletes the post
