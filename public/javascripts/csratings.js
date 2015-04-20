@@ -29,12 +29,7 @@ app.config(function($routeProvider){
 });
 
 app.factory('postService', function($resource){
-<<<<<<< HEAD
 	return $resource('/api/posts/:id', null, 
-=======
-	
-	return $resource('/api/posts/:id', null,
->>>>>>> fa7167635ed9eb04e7554266710d23def6deb491
     {
         'update': { method:'PUT' }
     });
@@ -54,7 +49,6 @@ app.controller('mainController', function(postService, $scope, $rootScope){
 	};
 
 	$scope.incrementUpvotes = function(post) {
-<<<<<<< HEAD
 		postService.get({id:post._id}, function(p) {
 			console.log("test");
 			p.$update({id: p._id}, function() {
@@ -62,11 +56,6 @@ app.controller('mainController', function(postService, $scope, $rootScope){
 				console.log("success");
 			});
 		});
-=======
-		console.log(post._id);
-		post.upvotes++;
-		post.$update();
->>>>>>> fa7167635ed9eb04e7554266710d23def6deb491
 	};
 });
 
