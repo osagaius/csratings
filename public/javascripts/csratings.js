@@ -20,6 +20,10 @@ app.config(function($routeProvider){
 		})
 		.when('/profile', {
 			templateUrl: 'profile.html',
+			controller: 'authController'
+		})
+		.when('/post', {
+			templateUrl: 'post.html',
 			controller: 'mainController'
 		})
 		//the login display
@@ -41,7 +45,7 @@ app.factory('postService', function($resource){
     });
 });
 
-app.controller('mainController', function(postService, $scope, $rootScope){
+app.controller('mainController', function(postService, $scope, $rootScope, $location){
 	$scope.posts = postService.query();
 	$scope.newPost = {created_by: '', title: '', description: '', upvotes: 0, created_at: ''};
 	
@@ -52,6 +56,7 @@ app.controller('mainController', function(postService, $scope, $rootScope){
 	    $scope.posts = postService.query();
 	    $scope.newPost = {created_by: '', title: '', description: '', upvotes: 0, created_at: ''};
 	  });
+	  $location.path('/');
 	};
 
 	$scope.incrementUpvotes = function(post) {
@@ -61,6 +66,16 @@ app.controller('mainController', function(postService, $scope, $rootScope){
 			});
 		});
 	};
+
+	$scope.postPage = function(post) {
+		postService.get({id:post._id}, function(p) {
+			console.log(p);
+			console.log("Set scope");
+			$scope.post = p;
+			$location.path('/post');
+			console.log("loaded post page.");
+		})
+	}
 });
 
 app.controller('authController', function($scope, $http, $rootScope, $location){

@@ -1,0 +1,8 @@
+<div> 
+		<p>{{post.title}}</p>
+		<p>{{post.description}}</p>
+		<small>Posted by @{{post.created_by}}</small><br>
+		Votes: <small>{{post.upvotes}}</small>
+		<a ng-click="incrementUpvotes(post)">^</a>
+		<small class="pull-right">{{post.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+</div>
