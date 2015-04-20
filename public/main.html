@@ -4,8 +4,9 @@
 			<span ng-click="postPage(post)">
 				<p>{{post.title}}</p>
 				<p>{{post.description}}</p>
+			</span>
 				<small>Posted by @{{post.created_by}}</small><br>
-				Votes: <small>{{post.upvotes}}</small>			</span>
+				Votes: <small>{{post.upvotes}}</small>			
 				<a ng-click="incrementUpvotes(post)" ng-show="authenticated">^</a>
 				<small class="pull-right">{{post.created_at | date:"h:mma 'on' MMM d, y"}}</small>
 		</div>
