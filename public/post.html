@@ -1,5 +1,14 @@
-Title: {{currentPost.title}} <br>
-Description: {{currentPost.description}} <br>
-Upvotes: {{currentPost.upvotes}} <br>
+<div id="post-stream">
+			<h4>Idea by: {{currentPost.created_by}}</h4>
+<div class="post" style="background-color: #f2f9ff;"> 
 
-
+	<span ng-click="postPage(post)">
+		<p>{{currentPost.title}}</p>
+		<p>{{currentPost.description}}</p>
+	</span>
+		<small>Posted by @{{currentPost.created_by}}</small><br>
+		Votes: <small>{{currentPost.upvotes}}</small>			
+		<a ng-click="incrementUpvotes(post)" ng-show="authenticated">^</a>
+		<small class="pull-right">{{currentPost.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+		</div>
+</div>
