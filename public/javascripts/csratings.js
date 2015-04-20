@@ -45,10 +45,25 @@ app.factory('postService', function($resource){
     });
 });
 
-app.controller('mainController', function(postService, $scope, $rootScope, $location){
+app.factory('currentPostService', function($resource) {
+	 var currentPost = {}
+	 function set(data) {
+	   currentPost = data;
+	 }
+	 function get() {
+	  return currentPost;
+	 }
+
+	 return {
+	  set: set,
+	  get: get
+	 }
+});
+
+app.controller('mainController', function(postService, currentPostService, $scope, $rootScope, $location){
 	$scope.posts = postService.query();
 	$scope.newPost = {created_by: '', title: '', description: '', upvotes: 0, created_at: ''};
-	
+	$scope.currentPost = currentPostService.get();
 	$scope.post = function() {
 	  $scope.newPost.created_by = $rootScope.current_user;
 	  $scope.newPost.created_at = Date.now();
@@ -68,14 +83,11 @@ app.controller('mainController', function(postService, $scope, $rootScope, $loca
 	};
 
 	$scope.postPage = function(post) {
-		postService.get({id:post._id}, function(p) {
-			console.log(p);
-			console.log("Set scope");
-			$scope.post = p;
-			$location.path('/post');
-			console.log("loaded post page.");
-		})
-	}
+		$scope.specificPost = postService.get({id:post._id});
+		currentPostService.set($scope.specificPost);
+		$location.path('/post');
+	};
+
 });
 
 app.controller('authController', function($scope, $http, $rootScope, $location){
