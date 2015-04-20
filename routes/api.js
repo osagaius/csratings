@@ -50,7 +50,32 @@ router.route('/posts')
 		});
 	});
 
-//post-specific commands. likely won't be used
+router.route('/posts/:id/comments')
+	//creates a new post
+	.post(function(req, res){
+
+		var comment = new Comment();
+		comment.text = req.body.text;
+
+		comment.created_by = req.body.created_by;
+		comment.save(function(err, post) {
+			if (err){
+				return res.send(500, err);
+			}
+			return res.json(comment);
+		});
+	})
+	//gets all posts
+	.get(function(req, res){
+		Comment.find(function(err, posts){
+			if(err){
+				return res.send(500, err);
+			}
+			return res.send(200,posts);
+		});
+	});
+
+//post-specific commands
 router.route('/posts/:id')
 	//gets specified post
 	.get(function(req, res){
@@ -88,4 +113,4 @@ router.route('/posts/:id')
 		});
 	});
 
-module.exports = router;
+	module.exports = router;

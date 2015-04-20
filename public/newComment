@@ -1,0 +1,7 @@
+<div class="clearfix" >
+  <form ng-Submit="comment()" ng-show="authenticated">
+    <h4>New Comment</h4>
+    <textarea required class="form-control" maxlength="200" rows="3" placeholder="Text" ng-model="newComment.text"></textarea>
+    <input class="btn submit-btn pull-right" id="newComment" type="submit" value="Create Comment" />
+  </form>
+</div>
