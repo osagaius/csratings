@@ -14,6 +14,9 @@ var authenticate = require('./routes/authenticate')(passport);
 var mongoose = require('mongoose');                         //add for Mongo support
 mongoose.connect('mongodb://localhost/test-csratings');              //connect to Mongo
 var app = express();
+//// Initialize Passport
+var initPassport = require('./passport-init');
+initPassport(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,11 +45,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-//// Initialize Passport
-var initPassport = require('./passport-init');
-initPassport(passport);
-
 // error handlers
 
 // development error handler

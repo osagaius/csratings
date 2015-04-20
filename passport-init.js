@@ -13,6 +13,7 @@ module.exports = function(passport){
 
 	passport.deserializeUser(function(id, done) {
 		User.findById(id, function(err, user) {
+			if (err) return done(err);
 			console.log('deserializing user:',user.username);
 			done(err, user);
 		});

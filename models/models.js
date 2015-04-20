@@ -15,10 +15,5 @@ var userSchema = new mongoose.Schema({
 	created_at: {type: Date, default: Date.now}
 })
 
-postSchema.methods.upvote = function(cb) {
-  this.upvotes += 1;
-  this.save(cb);
-};
-
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);

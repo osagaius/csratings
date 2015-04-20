@@ -1,0 +1,8 @@
+<div class="clearfix">
+  <form ng-Submit="post()" ng-show="authenticated">
+    <h4>{{current_user}}'s new idea!</h4>
+    <input required class="form-control" maxlength="100" rows="1" placeholder="Title" ng-model="newPost.title"></input><br>
+    <textarea required class="form-control" maxlength="200" rows="3" placeholder="Description" ng-model="newPost.description"></textarea>
+    <input class="btn submit-btn pull-right" type="submit" value="Create Idea" />
+  </form>
+</div>

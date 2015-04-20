@@ -1,7 +1,4 @@
-var app = angular.module('csratings', ['ngRoute', 'ngResource']).run(function($rootScope) {
-	$rootScope.authenticated = false;
-	$rootScope.current_user = '';
-	
+var app = angular.module('csratings', ['ngRoute', 'ngResource']).run(function($rootScope) {	
 	$rootScope.signout = function(){
 		$rootScope.authenticated = false;
 		$rootScope.current_user = '';
@@ -14,6 +11,15 @@ app.config(function($routeProvider){
 		//the timeline display
 		.when('/', {
 			templateUrl: 'main.html',
+			controller: 'mainController'
+		})
+		//the new post display
+		.when('/newPost', {
+			templateUrl: 'newPost.html',
+			controller: 'mainController'
+		})
+		.when('/profile', {
+			templateUrl: 'profile.html',
 			controller: 'mainController'
 		})
 		//the login display
@@ -50,10 +56,8 @@ app.controller('mainController', function(postService, $scope, $rootScope){
 
 	$scope.incrementUpvotes = function(post) {
 		postService.get({id:post._id}, function(p) {
-			console.log("test");
 			p.$update({id: p._id}, function() {
 				$scope.posts = postService.query();
-				console.log("success");
 			});
 		});
 	};
