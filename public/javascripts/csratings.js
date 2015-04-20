@@ -18,10 +18,6 @@ app.config(function($routeProvider){
 			templateUrl: 'newPost.html',
 			controller: 'mainController'
 		})
-		.when('/profile', {
-			templateUrl: 'profile.html',
-			controller: 'authController'
-		})
 		.when('/post', {
 			templateUrl: 'post.html',
 			controller: 'mainController'
