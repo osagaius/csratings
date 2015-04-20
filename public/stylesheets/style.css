@@ -5,6 +5,11 @@ body {
 	width: 100%;
     height: 100%;
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+	background-image: url("GalenTran-stylized-circuit-board.jpg");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	font-weight: bold;
+	color: silver;
 }
 
 a {
@@ -17,9 +22,10 @@ a {
 }
 
 .post {
-	padding: 10px;
+	padding: 20px;
 	margin-bottom: 5px;
 	border-radius: 5px;
+	color: black;
 }
 
 .odd {
